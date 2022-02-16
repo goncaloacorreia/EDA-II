@@ -1,0 +1,10 @@
+#executar com input:
+java main < input.txt > output.txt
+
+#scanner:
+java.io.BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+
+String input.readLine()
+Integer.parseInteger(input.readLine());
+
+ String [] input.readLine().split("_")
