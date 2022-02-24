@@ -5,18 +5,23 @@ public class Main{
     public static void main(String[] args) throws Exception{
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 
-        int ncoins;
-        int types [];
+        int ntypes;
+        int types [] = new int[100];
         int nquestions;
-        int q [];
+        int questions [] = new int[200000];
 
-        ncoins = Integer.parseInt(input.readLine());
+        ntypes = Integer.parseInt(input.readLine());
+        String s []= input.readLine().split(" ");
 
-        for(int x = 0; x < ncoins; x ++){
-            String s []= input.readLine().split(" ");
-            for(int saux = 0; saux < s.length; saux ++){
-                int sint = Integer.parseInt(s[saux]);
-            }
+        for(int x = 0; x < ntypes; x ++){ //preencher types[]
+            types[x] = Integer.parseInt(s[x]);
+        }
+
+        nquestions = Integer.parseInt(input.readLine());
+        
+
+        for(int y = 0; y < nquestions; y ++){ //preencher questions
+            questions[y] = Integer.parseInt(input.readLine());
         }
 
 
