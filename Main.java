@@ -24,6 +24,24 @@ public class Main{
             questions[y] = Integer.parseInt(input.readLine());
         }
 
+        for(int z = 0; z < nquestions; z ++){ //percorrer questions
+            int problema = questions[z];
+            int m [] = new int[problema + 1];
+            m[0] = 0;
 
+            for(int x = 1; x <= problema; x++){
+                m[x] = 999999999;
+                for(int i = 1; i < ntypes; i++){
+                    if(types[i] <= x){
+                        if( (m[x - types[i]] + 1) < m[x] ){
+                            m[x] = m[x - types[i]] + 1;
+                        }
+                    }
+                }
+            }
+            
+            System.out.println(problema + ": " + "[" + m[problema] + "]");
+        }
+        
     }
 }
