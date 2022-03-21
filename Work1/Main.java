@@ -1,0 +1,111 @@
+package Work1;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        long subtrees[] = new long[1000];
+        // Array com o tamanho das peÃ§as de lego disponÃ­veis.
+        int lego[] = new int[9];
+        long result = 1;
+
+        lego[0] = 1;
+        lego[1] = 2;
+        lego[2] = 3;
+        lego[3] = 4;
+        lego[4] = 6;
+        lego[5] = 8;
+        lego[6] = 10;
+        lego[7] = 12;
+        lego[8] = 16;
+
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+
+        String s[] = input.readLine().split(" ");
+
+        // NÃºmero de linhas do input.
+        int rows = Integer.parseInt(s[0]);
+
+        // NÃºmero de colunas do input.
+        int columns = Integer.parseInt(s[1]);
+
+        String row;
+
+        // Array de inteiros que irÃ¡ conter o tamanho das sequÃªncias.
+        int count[] = new int[9999];
+        int countaux = 0;
+
+        // Ciclo utilizado para fazer a contagem do tamanho das diferentes sequÃªncias encontradas no input dado.
+        for (int x = 0; x < rows; x++) {
+            char letra = '.';
+            int number = 0;
+            row = input.readLine();
+            for (int y = 0; y < columns; y++) {
+                if (row.charAt(y) == '.' && letra == '.') {
+
+                }
+                else if (letra == '.' && row.charAt(y) != letra) {
+
+                    letra = row.charAt(y);
+                    number++;
+
+                } else if (letra != '.' && row.charAt(y) == letra) {
+
+                    number++;
+
+                } else if (letra != '.' && row.charAt(y) == '.') {
+                    
+                    count[countaux] = number;
+                    countaux++;
+                    number = 0;
+                    letra = row.charAt(y);
+
+                } else if (letra != '.' && row.charAt(y) != letra) {
+                    
+                    count[countaux] = number;
+                    countaux++;
+                    number = 0;
+                    number++;
+                    letra = row.charAt(y);
+
+                }
+
+                if (letra != '.' && y == columns - 1) {
+                    count[countaux] = number;
+                    countaux++;
+                }
+            }
+        }
+        // Ciclo encarregue de calcular as vÃ¡rias combinaÃ§Ãµes possÃ­veis para cada sequÃªncia encontrada.
+        for (int counter = 0; counter < countaux; counter++) {
+            int seq = count[counter];
+            long mult = 1;
+            for (int aux = 1; aux <= seq; aux++) {
+                long value = 0;
+                for (int auxLego = 0; auxLego < 9; auxLego++) {
+                    if (lego[auxLego] <= aux) {
+                        if (aux - lego[auxLego] == 0) {
+
+                            value++;
+
+                        } else if (aux - lego[auxLego] != 0) {
+
+                            value = value + subtrees[aux - lego[auxLego]];
+
+                        }
+                    } else {
+                        break;
+                    }
+                    subtrees[aux] = value;
+                }
+            }
+            mult = mult * subtrees[seq];
+            result = result * mult;
+
+        }
+
+        System.out.println(result);
+
+    }
+}
