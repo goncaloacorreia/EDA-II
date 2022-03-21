@@ -15,32 +15,45 @@ public class Work1{
         int count [] = new int[9999];
         int countaux = 0;
         for(int x = 0; x < rows; x++){ //linhas
-            char letra = ' ';
+            char letra = '.';
             int number = 0;
             row = input.readLine();
             for(int y = 0; y < columns; y++){ //colunas
-                System.out.print(letra);
-                if(row.charAt(y) != '.' && letra == ' '){
-                    letra = row.charAt(y);
-                    number ++;
-                } 
-                else if(row.charAt(y) == letra){
-                    number ++;
+                if(row.charAt(y) == '.' && letra == '.'){
                 }
-                else if(row.charAt(y) == '.' && letra != ' '){
-                    count[countaux] = number;
-                    countaux ++;
-                    letra = ' ';
-                }
-                else if(row.charAt(y) != '.' && row.charAt(y) != letra){
-                    count[countaux] = number;
-                    countaux ++;
+               
+                else if(letra == '.' && row.charAt(y) != letra)
+                {
                     letra = row.charAt(y);
+                    number++;
+                }
+                else if(letra != '.' && row.charAt(y) == letra)
+                {
+                    number++;
+                }
+                else if(letra != '.' && row.charAt(y) == '.')
+                {
+                    count[countaux] = number;
+                    countaux++;
+                    number = 0;
+                    letra = row.charAt(y);
+                }
+                else if(letra != '.' && row.charAt(y) != letra)
+                {
+                    count[countaux] = number;
+                    countaux++;
+                    number = 0;
+                    number++;
+                    letra = row.charAt(y);
+                }
+
+                if(letra != '.' && y == columns - 1)
+                {
+                    count[countaux] = number;
+                    countaux++;
                 }
             }
         }
-        System.out.println(count[2]);
 
     }
 }
-
