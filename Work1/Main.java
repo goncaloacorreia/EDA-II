@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 public class Main {
     public static void main(String[] args) throws Exception {
         long subtrees[] = new long[1000];
-        // Array com o tamanho das peÃ§as de lego disponÃ­veis.
+        // Array com o tamanho das peças de lego disponiveis.
         int lego[] = new int[9];
         long result = 1;
 
@@ -24,19 +24,19 @@ public class Main {
 
         String s[] = input.readLine().split(" ");
 
-        // NÃºmero de linhas do input.
+        // Numero de linhas do input.
         int rows = Integer.parseInt(s[0]);
 
-        // NÃºmero de colunas do input.
+        // Numero de colunas do input.
         int columns = Integer.parseInt(s[1]);
 
         String row;
 
-        // Array de inteiros que irÃ¡ conter o tamanho das sequÃªncias.
+        // Array de inteiros que irao conter o tamanho das sequÃªncias.
         int count[] = new int[9999];
         int countaux = 0;
 
-        // Ciclo utilizado para fazer a contagem do tamanho das diferentes sequÃªncias encontradas no input dado.
+        // Ciclo utilizado para fazer a contagem do tamanho das diferentes sequencias encontradas no input dado.
         for (int x = 0; x < rows; x++) {
             char letra = '.';
             int number = 0;
@@ -77,7 +77,7 @@ public class Main {
                 }
             }
         }
-        // Ciclo encarregue de calcular as vÃ¡rias combinaÃ§Ãµes possÃ­veis para cada sequÃªncia encontrada.
+        // Ciclo encarregue de calcular as varias combinaçoes possi­veis para cada sequencia encontrada.
         for (int counter = 0; counter < countaux; counter++) {
             int seq = count[counter];
             long mult = 1;
