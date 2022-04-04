@@ -4,21 +4,12 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 public class Main {
+    public final int subsize = 1000;
     public static void main(String[] args) throws Exception {
         long subtrees[] = new long[1000];
         // Array com o tamanho das peças de lego disponiveis.
-        int lego[] = new int[9];
+        int lego[] = {1,2,3,4,6,8,10,12,16};
         long result = 1;
-
-        lego[0] = 1;
-        lego[1] = 2;
-        lego[2] = 3;
-        lego[3] = 4;
-        lego[4] = 6;
-        lego[5] = 8;
-        lego[6] = 10;
-        lego[7] = 12;
-        lego[8] = 16;
 
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 
