@@ -1,3 +1,7 @@
+package SocialNetworks;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.*;
 
 class Main {
@@ -78,34 +82,26 @@ class Main {
 	int rsum = 0;
     for (i = 0; i < e; ++i)
       rsum += result[i].weight;
-	System.out.println(rsum);  
+	System.out.println(-rsum);  
   }
   
 
-  public static void main(String[] args) {
-    int vertices = 4; // Number of vertices
-    int edges = 5; // Number of edges
-    Main G = new Main(vertices, edges);
+  public static void main(String[] args) throws Exception{
 
-    G.edge[0].src = 0;
-    G.edge[0].dest = 1;
-    G.edge[0].weight = 3;
+    BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+    String s []= input.readLine().split(" ");
 
-    G.edge[1].src = 0;
-    G.edge[1].dest = 2;
-    G.edge[1].weight = 4;
+    int p = Integer.parseInt(s[0]);
+    int r = Integer.parseInt(s[1]);
 
-    G.edge[2].src = 1;
-    G.edge[2].dest = 2;
-    G.edge[2].weight = 5;
+    Main G = new Main(p, r);
 
-    G.edge[3].src = 1;
-    G.edge[3].dest = 3;
-    G.edge[3].weight = 4;
-
-    G.edge[4].src = 2;
-    G.edge[4].dest = 3;
-    G.edge[4].weight = 3;
+    for(int i = 0; i < r; i++){
+      s = input.readLine().split(" ");
+      G.edge[i].src = (Integer.parseInt(s[0]) - 1);
+      G.edge[i].dest = (Integer.parseInt(s[1]) - 1);
+      G.edge[i].weight = -(Integer.parseInt(s[2]));
+    }
 
     G.KruskalAlgo();
   }
