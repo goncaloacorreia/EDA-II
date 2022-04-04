@@ -1,33 +1,36 @@
-package Work1;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 public class Main {
-    public final int subsize = 1000;
     public static void main(String[] args) throws Exception {
-        long subtrees[] = new long[1000];
-        // Array com o tamanho das peças de lego disponiveis.
+        
+        
+        // Array com o tamanho das peÃ§as de lego disponÃ­veis.
         int lego[] = {1,2,3,4,6,8,10,12,16};
+
         long result = 1;
 
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 
         String s[] = input.readLine().split(" ");
 
-        // Numero de linhas do input.
+        // NÃºmero de linhas do input.
         int rows = Integer.parseInt(s[0]);
 
-        // Numero de colunas do input.
+        // NÃºmero de colunas do input.
         int columns = Integer.parseInt(s[1]);
+
+        int maxSeq = columns * rows;
+
+        long subtrees[] = new long[columns+1];
 
         String row;
 
-        // Array de inteiros que irao conter o tamanho das sequÃªncias.
-        int count[] = new int[9999];
+        // Array de inteiros que irÃ¡ conter o tamanho das sequÃªncias.
+        int count[] = new int[maxSeq];
         int countaux = 0;
 
-        // Ciclo utilizado para fazer a contagem do tamanho das diferentes sequencias encontradas no input dado.
+        // Ciclo utilizado para fazer a contagem do tamanho das diferentes sequÃªncias encontradas no input dado.
         for (int x = 0; x < rows; x++) {
             char letra = '.';
             int number = 0;
@@ -68,10 +71,9 @@ public class Main {
                 }
             }
         }
-        // Ciclo encarregue de calcular as varias combinaçoes possi­veis para cada sequencia encontrada.
+        // Ciclo encarregue de calcular as vÃ¡rias combinaÃ§Ãµes possÃ­veis para cada sequÃªncia encontrada.
         for (int counter = 0; counter < countaux; counter++) {
             int seq = count[counter];
-            long mult = 1;
             for (int aux = 1; aux <= seq; aux++) {
                 long value = 0;
                 for (int auxLego = 0; auxLego < 9; auxLego++) {
@@ -91,8 +93,8 @@ public class Main {
                     subtrees[aux] = value;
                 }
             }
-            mult = mult * subtrees[seq];
-            result = result * mult;
+            //Vai se multiplicando os valores de cada sequÃªncia, cujo resultado serÃ¡ a resposta final
+            result = result * subtrees[seq];
 
         }
 
