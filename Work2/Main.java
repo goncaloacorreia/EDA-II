@@ -1,7 +1,11 @@
 import java.io.*;
 import java.awt.Point;
+import java.util.LinkedList;
+
 
 public class Main{
+
+    public final static int counter = 150;
 
     //função da distância entre dois pontos
     public static double distance(Point A, Point B)
@@ -57,7 +61,6 @@ public class Main{
 
         // lista dos pontos
         Point new_points[] = new Point[points];
-
         
         //armazenar pontos
         for(int aux = 0; aux<points; aux++)
@@ -73,17 +76,18 @@ public class Main{
         //Realiza se o sort dos pontos
         quickSort(new_points, 0, new_points.length-1);
 
+        
+        WeightedGraph.Graph graph = new WeightedGraph.Graph(points);
 
-        for(int aux1 = 0; aux1<points; aux1++)
+        graph.addEgde(0, 1, 4);
+
+        for(int aux1 = 0; aux1<counter; aux1++)
         {
-            System.out.println(new_points[aux1]);
-
 
         }
 
         
-
-
+        
 
     }
 
