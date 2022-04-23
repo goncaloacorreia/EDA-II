@@ -1,3 +1,5 @@
+package SpreadNews;
+
 
 import java.util.*; 
 //undirected graph represented using adjacency list. 
