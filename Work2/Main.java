@@ -77,7 +77,7 @@ public class Main {
         // Realiza-se o sort dos pontos
         quickSort(new_points, 0, new_points.length - 1);
 
-        GFG.Graph g = new GFG.Graph(points);
+        BFS.Graph g = new BFS.Graph(points);
 
         for (; cases > 0; cases--) {
                 double reach = Integer.parseInt(input.readLine());

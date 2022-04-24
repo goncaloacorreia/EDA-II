@@ -1,11 +1,7 @@
-// Java to shortest path from a given source vertex 's' to
-// a given destination vertex 't'. Expected time complexity
-// is O(V+E).
 import java.util.*;
 
-public class GFG
+public class BFS
 {
-
 	// This class represents a directed graph using adjacency
 	// list representation
 	public static class Graph
@@ -117,28 +113,4 @@ public class GFG
 			return 0;
 		}
 	}
-
-	// Driver Code
-	/*public static void main(String[] args)
-	{
-
-		// Create a graph given in the above diagram
-		int V = 4;
-		Graph g = new Graph(V);
-		g.addEdge(0, 1, 2);
-		g.addEdge(0, 2, 2);
-		g.addEdge(1, 2, 1);
-		g.addEdge(1, 3, 1);
-		g.addEdge(2, 0, 1);
-		g.addEdge(2, 3, 2);
-		g.addEdge(3, 3, 2);
-
-		int src = 0, dest = 3;
-		System.out.printf("\nShortest Distance between" +
-							" %d and %d is %d\n", src,
-							dest, g.findShortestPath(src, dest));
-	} */
 }
-
-// This code is contributed by
-// sanjeev2552
