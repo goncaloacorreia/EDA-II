@@ -4,9 +4,9 @@ public class WeightedGraph {
  static class Edge {
  int source;
  int destination;
- int weight;
+ double weight;
 
-    public Edge(int source, int destination, int weight) {
+    public Edge(int source, int destination, double weight) {
     this.source = source;
     this.destination = destination;
     this.weight = weight;
@@ -26,7 +26,7 @@ public class WeightedGraph {
         }
     }
 
-    public void addEgde(int source, int destination, int weight) {
+    public void addEgde(int source, int destination, double weight) {
         Edge edge = new Edge(source, destination, weight);
         adjacencylist[source].addFirst(edge); //for directed graph
     }
@@ -40,6 +40,8 @@ public class WeightedGraph {
             }
         }
     }
+
+    
  }
  /*public static void main(String[] args) {
     int vertices = 6;
