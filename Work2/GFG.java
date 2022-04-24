@@ -51,8 +51,8 @@ public class GFG
 			// If we reached root of shortest path tree
 			if (parent[s] == -1)
 			{
-				System.out.printf("Shortest Path between"+
-								"%d and %d is %s ", s, d, s);
+				/*System.out.printf("Shortest Path between "+
+								"%d and %d is %s ", s, d, s);*/
 				return level;
 			}
 
@@ -60,7 +60,8 @@ public class GFG
 
 			level++;
 			if (s < this.V)
-				System.out.printf("%d ", s);
+				//System.out.printf("%d ", s);
+				System.out.printf("");
 
 			return level;
 		}
