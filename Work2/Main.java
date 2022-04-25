@@ -1,10 +1,12 @@
 import java.io.*;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.awt.Point;
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 
 public class Main {
-
-    public final static int counter = 150;
 
     // função da distância entre dois pontos
     public static double distance(Point A, Point B, double reach) {
@@ -51,9 +53,9 @@ public class Main {
 
         return start;
     }
-
+    
     public static void main(String[] args) throws IOException {
-
+        long start = System.currentTimeMillis();
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 
         String s[] = input.readLine().split(" ");
@@ -62,6 +64,10 @@ public class Main {
         int height = Integer.parseInt(s[1]);
         int cases = Integer.parseInt(s[2]);
 
+        int counter = 150;
+        if(points < 150){
+            counter = points;
+        }
         // lista dos pontos
         Point new_points[] = new Point[points];
 
@@ -75,79 +81,107 @@ public class Main {
 
         }
         // Realiza-se o sort dos pontos
-        quickSort(new_points, 0, new_points.length - 1);
+        //quickSort(new_points, 0, new_points.length - 1);
+        PointCmp z = new PointCmp();
 
-        BFS.Graph g = new BFS.Graph(points);
+        Arrays.sort(new_points, new PointCmp());
+        
+        
+        //BFS.Graph g = new BFS.Graph(points);
+        BFS2 g = new BFS2();
 
         for (; cases > 0; cases--) {
-                double reach = Integer.parseInt(input.readLine());
-                //System.out.println(reach);
-                for (int aux1 = 0; aux1 < points; aux1++) {
-                    
-                    for (int aux2 = aux1 + 1; aux2 < points; aux2++) {
-                        double dist = distance(new_points[aux1], new_points[aux2], reach);
 
-                        if(dist == -1)
-                        {
-                            continue;
-                        }
-                        else{
-                            g.addEdge(aux1, aux2, dist);
-                            g.addEdge(aux2, aux1, dist);
-                        }
+            double reach = Integer.parseInt(input.readLine());
+            //criação do grafo
+            ArrayList<ArrayList<Integer>> adj =
+                        new ArrayList<ArrayList<Integer>>(points);
+            for (int i = 0; i < points; i++) {
+                adj.add(new ArrayList<Integer>());
+            }
+            
+            for (int aux1 = 0; aux1 < points; aux1++) {
+                for (int aux2 = aux1 + 1; aux2 < counter; aux2++) {
+                    double dist = distance(new_points[aux1], new_points[aux2], reach);
 
+                    if(dist == -1)
+                    {
+                        continue;
                     }
-                }
-
-                boolean bench = false;
-                
-                if(reach >= height){
-                    bench = true;
-                }
-
-                int max_initials = -1;
-                int min_finals = -1;
-                for(int aux3 = 0; aux3 < points; aux3++){
-                    if(new_points[aux3].y <= reach){
-                        max_initials = aux3;
+                    else{
+                        g.addEdge(adj, aux1, aux2);
+                        //g.addEdge(adj, aux2, aux1);
                     }
-                    if( (height - new_points[aux3].y) <= reach){
-                        min_finals = aux3;
-                    }
-                }
 
-                boolean unreachable = false;
-                if(min_finals == -1){
-                    unreachable = true;
                 }
-                //System.out.println(max_initials + " " + min_finals);
+            }
+            
+            boolean bench = false;
+            
+            if(reach >= height){
+                bench = true;
+            }
 
-                /*int src = 0, dest = 14;
-                System.out.printf("\nShortest Distance between" +
-                                " %d and %d is %d\n", src,
-                                dest, g.findShortestPath(src, dest) + 1);*/
-                
-                int short_path = -1;
-                for(int aux4 = 0; aux4 < max_initials; aux4++){
-                    for(int aux5 = min_finals; aux5 < points; aux5++){
-                        if(g.findShortestPath(aux4, aux5) > short_path){
-                            short_path = g.findShortestPath(aux4, aux5);
-                        }
-                    }
-                }
-                
-                short_path += 1;
-                if(bench == true){
-                    System.out.println("0");
-                }
-                else if(unreachable == true){
-                    System.out.println("unreachable");
+            //verificar quais os pontos iniciais
+            int max_initials = -1;
+            for(int aux3 = 0; aux3 < points; aux3++){
+                if(new_points[aux3].y <= reach){
+                    max_initials = aux3;
                 }
                 else{
-                    System.out.println(short_path);
+                    break;
                 }
-       }
+            }
+            //verificar quais os pontos finais
+            int min_finals = -1;
+            for(int aux3 = points - 1; aux3 != -1; aux3--){
+                if( (height - new_points[aux3].y) <= reach){
+                    min_finals = aux3;
+                }
+                else{
+                    break;
+                }
+            }
+            
+            boolean unreachable = false;
+            if(min_finals == -1){
+                unreachable = true;
+            }
 
+            if(max_initials >= 35){
+                max_initials = 35;
+            }
+            
+            //encontrar o caminho mais curto
+            int short_path = 2147483647;
+            if(unreachable == false){
+                for(int aux4 = 0; aux4 <= max_initials; aux4++){
+                    //System.out.println("Initial: " + aux4);
+                    for(int aux5 = min_finals; aux5 < points; aux5++){
+                        //System.out.println("Final: " + aux5);
+                        if(g.ShortestDistance(adj, aux4, aux5, points) < short_path){
+                            short_path = g.ShortestDistance(adj, aux4, aux5, points);
+                        }
+                    }
+                } 
+            }
+            
+            short_path += 1;
+            if(bench == true){
+                System.out.println("0");
+            }
+            else if(unreachable == true){
+                System.out.println("unreachable");
+            }
+            else{
+                System.out.println(short_path);
+            }
+            
+        }
+        
+        long end = System.currentTimeMillis();
+        NumberFormat formatter = new DecimalFormat("#0.00000");
+        //System.out.println("Time: " + formatter.format((end - start) / 1000d) + " seconds");
     }
 
 }
