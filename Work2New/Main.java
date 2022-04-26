@@ -1,15 +1,10 @@
 import java.io.*;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.*;
 
-
 public class Main {
-
-    
 
     // função da distância entre dois pontos
     public static double distance(Point A, Point B, double reach) {
@@ -24,108 +19,104 @@ public class Main {
     }
 
     public static int printLevels(ArrayList<ArrayList<Integer>> graph, int V, int x, int height, double reach, Point new_points[])
-{   
-    boolean unreachable = true;
-    int min = 30001;
-	// array para cada nivel do node
-	int level[] = new int[V];
-	boolean marked[] = new boolean[V];
+    {   
+        boolean unreachable = true;
+        int min = 30001;
+        // array para cada nivel do node
+        int level[] = new int[V];
+        boolean marked[] = new boolean[V];
 
-	// criar a queue
-	Queue<Integer> que = new LinkedList<Integer>();
+        // criar a queue
+        Queue<Integer> que = new LinkedList<Integer>();
 
-	// dar enqueue
-	que.add(x);
+        // dar enqueue
+        que.add(x);
 
-	// nivel do node fonde inicializado a 0
-	level[x] = 0;
+        // nivel do node fonde inicializado a 0
+        level[x] = 0;
 
-	// marcado como visitado
-	marked[x] = true;
+        // marcado como visitado
+        marked[x] = true;
 
-    if(V == 1)
-    {
-        if(new_points[x].y + reach >= height)
-        {   unreachable = false;
-            
-            min = 0;
-            
+        if(V == 1)
+        {
+            if(new_points[x].y + reach >= height)
+            {   unreachable = false;
+                
+                min = 0;
+                
+            }
         }
-    }
-                    
-    
-    else{
-
-	
-	while (que.size() > 0)
-	{
+                        
         
+        else{
 
-		// primeiro elemento da queue
-		x = que.peek();
-
-		// dequeue eelemento
-		que.remove();
-
-		// percorrer os adjacentes do node x
-		for (int i = 0; i < graph.get(x).size(); i++)
-		{
-			// cada vizinho
-			int b = graph.get(x).get(i);
-            
-
-			// se b não estiver marcado, será adicionado à queue
-			if (!marked[b])
-			{
-
-				// enqueue b in queue
-				que.add(b);
-                
-                
+        
+            while (que.size() > 0)
+            {
                 
 
-				// nivel do vertice = nivel do adjacente + 1
-				level[b] = level[x] + 1;
-                if(new_points[b].y + reach >= height)
+                // primeiro elemento da queue
+                x = que.peek();
+
+                // dequeue eelemento
+                que.remove();
+
+                // percorrer os adjacentes do node x
+                for (int i = 0; i < graph.get(x).size(); i++)
+                {
+                    // cada vizinho
+                    int b = graph.get(x).get(i);
                     
-                {   unreachable = false;
-                    if(level[b] < min)
+
+                    // se b não estiver marcado, será adicionado à queue
+                    if (!marked[b])
                     {
-                        min = level[b];
+
+                        // enqueue b in queue
+                        que.add(b);
+                        
+                        
+                        
+
+                        // nivel do vertice = nivel do adjacente + 1
+                        level[b] = level[x] + 1;
+                        if(new_points[b].y + reach >= height)
+                            
+                        {   unreachable = false;
+                            if(level[b] < min)
+                            {
+                                min = level[b];
+                            }
+                        }
+
+                        // marcar b
+                        marked[b] = true;
                     }
                 }
+            }
+        }
 
-				// marcar b
-				marked[b] = true;
-			}
-		}
-	}
-    }
+        if(reach >= height)
+        {
+            return 0;
 
-    if(reach >= height)
-    {
-        return 0;
+        }
 
-    }
+        else if(unreachable == true)
+        {
+            return -1;
+            
+        }
+        else{
+            
+            return min + 1;
 
-	else if(unreachable == true)
-    {
-        return -1;
-        
-    }
-	else{
-        
-        return min + 1;
+        }
 
     }
 
-    
-}
-
-
-    
     public static void main(String[] args) throws IOException {
-        long start = System.currentTimeMillis();
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 
         String s[] = input.readLine().split(" ");
@@ -133,8 +124,6 @@ public class Main {
         int points = Integer.parseInt(s[0]);
         int height = Integer.parseInt(s[1]);
         int cases = Integer.parseInt(s[2]);
-
-        
 
         int counter = 150;
         if(points < 150){
@@ -150,18 +139,11 @@ public class Main {
             int y = Integer.parseInt(single_point[1]);
 
             new_points[aux] = new Point(x, y);
-
         }
-        // Realiza-se o sort dos pontos
-        PointCmp z = new PointCmp();
 
+        // Realiza-se o sort dos pontos
         Arrays.sort(new_points, new PointCmp());
         
-        
-        
-        
-        
-
         for (; cases > 0; cases--) {
             int min = 30001;
             boolean u = true;
@@ -187,7 +169,6 @@ public class Main {
                         adj.get(aux2).add(aux1);
                         
                     }
-
                 }
             }
 
@@ -221,29 +202,7 @@ public class Main {
                     System.out.println(min);
 
                 }
-                
             }
-
-
-
-
-            
-
-
-            
-
-            
-
-            
-            
-
-            
-            
-            
-            
-            
-            
-            
         }
     }
 

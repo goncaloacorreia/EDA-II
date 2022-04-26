@@ -159,8 +159,9 @@ public class Main {
                     //System.out.println("Initial: " + aux4);
                     for(int aux5 = min_finals; aux5 < points; aux5++){
                         //System.out.println("Final: " + aux5);
-                        if(g.ShortestDistance(adj, aux4, aux5, points) < short_path){
-                            short_path = g.ShortestDistance(adj, aux4, aux5, points);
+                        int shrt = g.ShortestDistance(adj, aux4, aux5, points);
+                        if(shrt < short_path){
+                            short_path = shrt;
                         }
                     }
                 } 

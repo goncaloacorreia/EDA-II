@@ -31,13 +31,13 @@ public class BFS2 {
         }
  
         // LinkedList to store path
-        LinkedList<Integer> path = new LinkedList<Integer>();
+        /*LinkedList<Integer> path = new LinkedList<Integer>();
         int crawl = dest;
         path.add(crawl);
         while (pred[crawl] != -1) {
             path.add(pred[crawl]);
             crawl = pred[crawl];
-        }
+        }*/
  
         // Print distance
         //System.out.println("Shortest path length is: " + dist[dest]);
@@ -91,7 +91,7 @@ public class BFS2 {
                     dist[adj.get(u).get(i)] = dist[u] + 1;
                     pred[adj.get(u).get(i)] = u;
                     queue.add(adj.get(u).get(i));
- 
+                    
                     // stopping condition (when we find
                     // our destination)
                     if (adj.get(u).get(i) == dest)
