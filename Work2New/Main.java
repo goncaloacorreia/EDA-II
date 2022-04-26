@@ -48,7 +48,6 @@ public class Main {
             }
         }
                         
-        
         else{
 
         
@@ -76,9 +75,6 @@ public class Main {
                         // enqueue b in queue
                         que.add(b);
                         
-                        
-                        
-
                         // nivel do vertice = nivel do adjacente + 1
                         level[b] = level[x] + 1;
                         if(new_points[b].y + reach >= height)
@@ -99,17 +95,21 @@ public class Main {
 
         if(reach >= height)
         {
+
             return 0;
 
         }
 
         else if(unreachable == true)
         {
+
             return -1;
             
         }
         else{
-            
+            if(min == 1){
+                return 1;
+            }
             return min + 1;
 
         }
@@ -181,7 +181,13 @@ public class Main {
                     break;
                 }
             }
-            
+
+            if(max_initials == -1 && reach < height){
+                System.out.println("unreachable");
+            } else if(max_initials == -1 && reach >= height){
+                System.out.println("0");
+            }
+
             for(int aux4 = 0; aux4 <= max_initials; aux4++){
                 
                 int aux5 = printLevels(adj, points, aux4, height, reach, new_points);
@@ -192,12 +198,12 @@ public class Main {
                         min = aux5;
                     }
                 }
-                 if( u == true && aux4 == max_initials)
+                if( u == true && aux4 == max_initials)
                 {
                     System.out.println("unreachable");
 
                 }
-                if( u == false && aux4 == max_initials)
+                else if( u == false && aux4 == max_initials)
                 {
                     System.out.println(min);
 
